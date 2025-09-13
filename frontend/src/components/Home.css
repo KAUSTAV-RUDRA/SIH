@@ -157,9 +157,9 @@
 
 .navigation-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
 }
 
@@ -202,6 +202,7 @@
 .card-a:hover { border-color: #ff6b6b; }
 .card-b:hover { border-color: #4ecdc4; }
 .card-c:hover { border-color: #45b7d1; }
+.card-d:hover { border-color: #96ceb4; }
 
 .card-icon {
   font-size: 3rem;
@@ -386,5 +387,362 @@
   .cta-button {
     width: 100%;
     max-width: 250px;
+  }
+}
+
+/* Calendar Section Styles - Google Calendar Inspired */
+.calendar-section {
+  padding: 4rem 2rem;
+  background: #f8f9fa;
+  position: relative;
+  z-index: 2;
+}
+
+.calendar-section-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.calendar-section-title {
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: 400;
+  color: #3c4043;
+  margin-bottom: 0.5rem;
+  font-family: 'Google Sans', 'Roboto', sans-serif;
+}
+
+.calendar-section-subtitle {
+  text-align: center;
+  font-size: 1rem;
+  color: #5f6368;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: 400;
+}
+
+.home-calendar-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  background: white;
+  border-radius: 8px;
+  padding: 0;
+  box-shadow: 0 1px 3px rgba(60, 64, 67, 0.3), 0 4px 8px 3px rgba(60, 64, 67, 0.15);
+  border: 1px solid #dadce0;
+}
+
+.home-calendar-main {
+  display: flex;
+  flex-direction: column;
+}
+
+.home-calendar-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid #dadce0;
+  background: white;
+}
+
+.home-nav-button {
+  background: white;
+  color: #1a73e8;
+  border: 1px solid #dadce0;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  font-family: 'Google Sans', 'Roboto', sans-serif;
+}
+
+.home-nav-button:hover {
+  background: #f8f9fa;
+  border-color: #1a73e8;
+}
+
+.home-current-month {
+  font-size: 22px;
+  font-weight: 400;
+  text-align: center;
+  margin: 0;
+  color: #3c4043;
+  font-family: 'Google Sans', 'Roboto', sans-serif;
+}
+
+.home-calendar-grid {
+  background: white;
+  padding: 0;
+}
+
+.home-calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  border-bottom: 1px solid #dadce0;
+}
+
+.home-weekday {
+  text-align: center;
+  font-weight: 500;
+  padding: 12px 8px;
+  color: #5f6368;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-family: 'Google Sans', 'Roboto', sans-serif;
+  border-right: 1px solid #dadce0;
+}
+
+.home-weekday:last-child {
+  border-right: none;
+}
+
+.home-calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.home-calendar-day {
+  min-height: 106px;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border-right: 1px solid #dadce0;
+  border-bottom: 1px solid #dadce0;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  position: relative;
+  padding: 4px;
+}
+
+.home-calendar-day:nth-child(7n) {
+  border-right: none;
+}
+
+.home-calendar-day:hover {
+  background: #f8f9fa;
+}
+
+.home-calendar-day.empty {
+  background: #f8f9fa;
+  cursor: default;
+}
+
+.home-calendar-day.empty:hover {
+  background: #f8f9fa;
+}
+
+.home-calendar-day.has-festival {
+  background: white;
+}
+
+.home-day-number {
+  font-weight: 400;
+  font-size: 13px;
+  color: #3c4043;
+  margin-bottom: 2px;
+  font-family: 'Google Sans', 'Roboto', sans-serif;
+  line-height: 1;
+}
+
+.home-festival-indicator {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex: 1;
+  overflow: hidden;
+}
+
+.home-festival-dot {
+  height: 16px;
+  border-radius: 3px;
+  margin: 1px 0;
+  font-size: 10px;
+  padding: 1px 4px;
+  color: white;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  font-family: 'Google Sans', 'Roboto', sans-serif;
+}
+
+.home-festival-dot.religious {
+  background: #ea4335;
+}
+
+.home-festival-dot.national {
+  background: #1a73e8;
+}
+
+.home-festival-dot.cultural {
+  background: #34a853;
+}
+
+.home-festival-dot.regional {
+  background: #fbbc04;
+}
+
+.home-festival-dot.educational {
+  background: #9c27b0;
+}
+
+.home-festival-dot.environmental {
+  background: #00bcd4;
+}
+
+.home-festival-dot.health {
+  background: #ff9800;
+}
+
+.home-festival-dot.tourism {
+  background: #e91e63;
+}
+
+.home-festival-dot.more-events {
+  background: #5f6368;
+  font-size: 9px;
+  font-style: italic;
+}
+
+.home-calendar-legend {
+  padding: 16px 24px;
+  border-top: 1px solid #dadce0;
+  background: white;
+}
+
+.home-calendar-legend h4 {
+  font-size: 14px;
+  font-weight: 500;
+  color: #3c4043;
+  margin-bottom: 12px;
+  font-family: 'Google Sans', 'Roboto', sans-serif;
+}
+
+.home-legend-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.home-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #5f6368;
+  font-family: 'Google Sans', 'Roboto', sans-serif;
+}
+
+.home-legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.home-legend-dot.religious {
+  background: #ea4335;
+}
+
+.home-legend-dot.national {
+  background: #1a73e8;
+}
+
+.home-legend-dot.cultural {
+  background: #34a853;
+}
+
+.home-legend-dot.regional {
+  background: #fbbc04;
+}
+
+.home-legend-dot.educational {
+  background: #9c27b0;
+}
+
+.home-legend-dot.environmental {
+  background: #00bcd4;
+}
+
+
+/* Responsive Design for Calendar */
+@media (max-width: 768px) {
+  .calendar-section {
+    padding: 3rem 1rem;
+  }
+  
+  .calendar-section-title {
+    font-size: 1.8rem;
+  }
+  
+  .home-calendar-navigation {
+    padding: 12px 16px;
+  }
+  
+  .home-current-month {
+    font-size: 18px;
+  }
+  
+  .home-nav-button {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+  
+  .home-calendar-day {
+    min-height: 80px;
+  }
+  
+  .home-day-number {
+    font-size: 12px;
+  }
+  
+  .home-festival-dot {
+    height: 14px;
+    font-size: 9px;
+    padding: 1px 3px;
+  }
+  
+  .home-weekday {
+    padding: 8px 4px;
+    font-size: 10px;
+  }
+  
+  .home-calendar-legend {
+    padding: 12px 16px;
+  }
+  
+  .home-legend-items {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .calendar-section-title {
+    font-size: 1.5rem;
+  }
+  
+  .home-calendar-day {
+    min-height: 70px;
+  }
+  
+  .home-festival-dot {
+    height: 12px;
+    font-size: 8px;
+  }
+  
+  .home-legend-items {
+    gap: 8px;
+  }
+  
+  .home-legend-item {
+    font-size: 11px;
   }
 }

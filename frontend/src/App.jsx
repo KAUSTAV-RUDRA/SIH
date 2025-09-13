@@ -4,6 +4,7 @@ import Home from './components/Home'
 import PageA from './components/PageA'
 import PageB from './components/PageB'
 import PageC from './components/PageC'
+import Calendar from './components/Calendar'
 import './App.css'
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
               <Link to="/page-a" className="nav-link">Page A</Link>
               <Link to="/page-b" className="nav-link">Page B</Link>
               <Link to="/page-c" className="nav-link">Page C</Link>
+              <Link to="/calendar" className="nav-link">Calendar</Link>
             </div>
           </div>
         </nav>
@@ -30,6 +32,7 @@ function App() {
             <Route path="/page-a" element={<PageA />} />
             <Route path="/page-b" element={<PageB />} />
             <Route path="/page-c" element={<PageC />} />
+            <Route path="/calendar" element={<Calendar />} />
           </Routes>
         </main>
       </div>
