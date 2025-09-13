@@ -2,7 +2,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 60vh;
+  min-height: calc(100vh - 80px);
+  width: 100%;
+}
+
+/* Special styling for Page C (AR/VR) */
+.page-container:has(a-scene) {
+  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .page-content {
@@ -10,11 +18,21 @@
 }
 
 .page-title {
-  font-size: 8rem;
+  font-size: 3rem;
   color: #2c3e50;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   font-weight: 300;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.page-description {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
 }
 
 .back-link {
