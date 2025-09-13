@@ -1,5 +1,5 @@
 {
-  "name": "frontend",
+  "name": "jharkhand-tourism-frontend",
   "version": "0.1.0",
   "private": true,
   "main": "index.js",
@@ -18,7 +18,10 @@
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.9.1",
     "react-scripts": "^5.0.1",
-    "aframe": "^1.5.0"
+    "aframe": "^1.5.0",
+    "leaflet": "^1.9.4",
+    "react-leaflet": "^4.2.1",
+    "axios": "^1.6.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.0.0",

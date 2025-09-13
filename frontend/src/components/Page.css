@@ -52,3 +52,27 @@
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
 }
+
+/* Custom map icons */
+.custom-div-icon {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Map container styling */
+.leaflet-container {
+  height: 400px;
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Error styling */
+.page-error {
+  background-color: #ffebee;
+  color: #c62828;
+  padding: 10px;
+  border-radius: 4px;
+  margin: 10px 0;
+  border-left: 4px solid #c62828;
+}
