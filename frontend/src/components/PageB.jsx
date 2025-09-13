@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { MapContainer, TileLayer, Marker, Popup, GeoJSON } from 'react-leaflet'
 import L from 'leaflet'
@@ -37,7 +37,12 @@ function PageB() {
   const [geoData, setGeoData] = useState(null)
   const [touristPlaces, setTouristPlaces] = useState([])
   const [error, setError] = useState('')
-  const [mapKey, setMapKey] = useState(0)
+  const [isMapReady, setIsMapReady] = useState(false)
+  const [mapKey, setMapKey] = useState(Date.now())
+  const mapRef = useRef(null)
+
+  // Generate unique container ID
+  const mapContainerId = `map-container-${mapKey}`
 
   useEffect(() => {
     let isMounted = true
@@ -60,6 +65,7 @@ function PageB() {
             features: districtsResponse.data.map(district => district.geojson_data)
           }
           setGeoData(geoJsonData)
+          setIsMapReady(true)
         }
       } catch (err) {
         if (isMounted) {
@@ -76,6 +82,22 @@ function PageB() {
     }
   }, [])
 
+  const handleMapCreated = useCallback((map) => {
+    console.log('Map created successfully with key:', mapKey)
+  }, [mapKey])
+
+  const handleRefreshMap = useCallback(() => {
+    console.log('Refreshing map...')
+    setMapKey(Date.now())
+    setError('')
+    setIsMapReady(false)
+    
+    // Small delay to ensure cleanup is complete
+    setTimeout(() => {
+      setIsMapReady(true)
+    }, 200)
+  }, [])
+
   const center = [23.6102, 85.2799]
 
   return (
@@ -85,10 +107,7 @@ function PageB() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
           <h1 className="page-title" style={{ margin: 0 }}>Map</h1>
           <button 
-            onClick={() => {
-              setMapKey(prev => prev + 1)
-              setError('')
-            }}
+            onClick={handleRefreshMap}
             style={{
               padding: '8px 16px',
               backgroundColor: '#3498db',
@@ -104,38 +123,42 @@ function PageB() {
         </div>
 
         <div style={{ height: 400, width: '100%', marginBottom: 16 }}>
-          {touristPlaces.length > 0 ? (
-            <MapContainer 
-              key={mapKey}
-              center={center} 
-              zoom={7} 
-              style={{ height: '100%', width: '100%' }}
-              whenCreated={(mapInstance) => {
-                console.log('Map created successfully')
-              }}
-            >
-              <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+          {isMapReady && touristPlaces.length > 0 ? (
+            <div key={mapKey} id={mapContainerId} style={{ height: '100%', width: '100%' }}>
+              <MapContainer 
+                center={center} 
+                zoom={7} 
+                style={{ height: '100%', width: '100%' }}
+                whenCreated={handleMapCreated}
+                preferCanvas={true}
+                key={mapKey}
+              >
+                <TileLayer 
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                />
 
-              {touristPlaces.map((p, i) => (
-                <Marker 
-                  key={`marker-${i}-${p.id}`} 
-                  position={[p.latitude, p.longitude]}
-                  icon={categoryIcons[p.category] || categoryIcons['Nature']}
-                >
-                  <Popup>
-                    <div>
-                      <h3>{p.name}</h3>
-                      <p><strong>Category:</strong> {p.category}</p>
-                      <p><strong>District:</strong> {p.district}</p>
-                      {p.description && <p>{p.description}</p>}
-                      {p.rating && <p><strong>Rating:</strong> {p.rating}/5</p>}
-                    </div>
-                  </Popup>
-                </Marker>
-              ))}
+                {touristPlaces.map((p, i) => (
+                  <Marker 
+                    key={`marker-${mapKey}-${p.id || i}`} 
+                    position={[p.latitude, p.longitude]}
+                    icon={categoryIcons[p.category] || categoryIcons['Nature']}
+                  >
+                    <Popup>
+                      <div>
+                        <h3>{p.name}</h3>
+                        <p><strong>Category:</strong> {p.category}</p>
+                        <p><strong>District:</strong> {p.district}</p>
+                        {p.description && <p>{p.description}</p>}
+                        {p.rating && <p><strong>Rating:</strong> {p.rating}/5</p>}
+                      </div>
+                    </Popup>
+                  </Marker>
+                ))}
 
-              {geoData && <GeoJSON key="districts" data={geoData} />}
-            </MapContainer>
+                {geoData && <GeoJSON key={`districts-${mapKey}`} data={geoData} />}
+              </MapContainer>
+            </div>
           ) : (
             <div style={{ 
               height: '100%', 
@@ -147,9 +170,12 @@ function PageB() {
               border: '2px dashed #ccc'
             }}>
               <div style={{ textAlign: 'center' }}>
-                <p>Loading map...</p>
+                <p>{isMapReady ? 'Loading map data...' : 'Preparing map...'}</p>
                 <p style={{ fontSize: '0.9rem', color: '#666' }}>
-                  If this persists, check the console for errors
+                  Tourist places: {touristPlaces.length} | Districts: {geoData ? 'Loaded' : 'Loading...'}
+                </p>
+                <p style={{ fontSize: '0.8rem', color: '#999' }}>
+                  Map Key: {mapKey}
                 </p>
               </div>
             </div>
