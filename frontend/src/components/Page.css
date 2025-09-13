@@ -10,11 +10,21 @@
 }
 
 .page-title {
-  font-size: 8rem;
+  font-size: 3rem;
   color: #2c3e50;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   font-weight: 300;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.page-description {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
 }
 
 .back-link {
