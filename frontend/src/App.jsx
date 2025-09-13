@@ -19,9 +19,9 @@ function App() {
             </Link>
             <div className="nav-menu">
               <Link to="/" className="nav-link">Home</Link>
-              <Link to="/page-a" className="nav-link">Page A</Link>
-              <Link to="/page-b" className="nav-link">Page B</Link>
-              <Link to="/page-c" className="nav-link">Page C</Link>
+              <Link to="/page-a" className="nav-link">ChatBot</Link>
+              <Link to="/page-b" className="nav-link">Maps</Link>
+              <Link to="/page-c" className="nav-link">Virtual Tour</Link>
               <Link to="/feedback" className="nav-link">Feedback</Link> {/* ✅ New link */}
             </div>
           </div>

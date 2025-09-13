@@ -40,12 +40,12 @@ function Home() {
           <Link to="/page-a" className="nav-card card-a">
             <div className="card-icon">📊</div>
             <div className="card-content">
-              <h3>Analytics & Data</h3>
-              <p>Explore comprehensive data and analytics about Jharkhand's demographics, economy, and development</p>
+              <h3>Smart Travel Chatbot</h3>
+              <p>Get tourist information about attractions, routes, and nearby facilities.</p>
               <div className="card-features">
-                <span className="feature-tag">Statistics</span>
-                <span className="feature-tag">Charts</span>
-                <span className="feature-tag">Reports</span>
+                <span className="feature-tag">Virtual Tour Guide</span>
+                <span className="feature-tag">Travel Planner</span>
+                <span className="feature-tag">24/7 Assistance</span>
               </div>
             </div>
             <div className="card-arrow">→</div>
