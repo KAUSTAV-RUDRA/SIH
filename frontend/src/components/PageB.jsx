@@ -211,7 +211,28 @@ function PageB() {
       } catch (err) {
         if (isMounted) {
           console.error('Error fetching data', err);
-          setError('Could not load map data');
+          // Provide a small fallback dataset so the map can render during development
+          const samplePlaces = [
+            { id: 1, name: 'Sample Temple', latitude: 23.6102, longitude: 85.2799, category: 'Religious', district: 'Sample' },
+            { id: 2, name: 'Sample Lake', latitude: 23.7, longitude: 85.3, category: 'Nature', district: 'Sample' }
+          ];
+          const sampleGeo = {
+            type: 'FeatureCollection',
+            features: [
+              {
+                type: 'Feature',
+                properties: { name: 'Sample District' },
+                geometry: {
+                  type: 'Polygon',
+                  coordinates: [[[85.25,23.55],[85.35,23.55],[85.35,23.65],[85.25,23.65],[85.25,23.55]]]
+                }
+              }
+            ]
+          };
+          setTouristPlaces(samplePlaces);
+          setGeoData(sampleGeo);
+          setIsMapReady(true);
+          setError('Could not load remote data — using sample data');
         }
       }
     };
