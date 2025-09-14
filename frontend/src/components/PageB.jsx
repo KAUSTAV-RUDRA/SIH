@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { TileLayer, Marker, Popup, GeoJSON } from 'react-leaflet'
-import MapWrapper from './MapWrapper'
+import { MapContainer, TileLayer, Marker, Popup, GeoJSON } from 'react-leaflet'
 import L from 'leaflet'
 import '../utils/leafletFix'
 import axios from 'axios'
@@ -165,31 +164,15 @@ function PageB() {
   useEffect(() => {
     let isMounted = true;
 
-    // Clear any existing map instances on mount
+    // Cleanup function for map instance
     const cleanup = () => {
-      const mapElements = document.querySelectorAll('.leaflet-container, .leaflet-control-container');
-      mapElements.forEach(el => {
-        if (el && el.parentNode) {
-          el.parentNode.removeChild(el);
-        }
-      });
-      // Remove Leaflet styles
-      const styles = document.querySelectorAll('style[data-leaflet]');
-      styles.forEach(style => style.remove());
-      
       if (mapRef.current) {
         mapRef.current.remove();
         mapRef.current = null;
       }
-      
-      // Clear any Leaflet-related classes from the body
-      document.body.classList.remove(...Array.from(document.body.classList).filter(c => c.startsWith('leaflet-')));
     };
 
-    // Clean up on mount
-    cleanup();
-
-    // Handle page reload/visibility changes
+    // Define visibility change handler
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'visible') {
         cleanup();
@@ -197,6 +180,7 @@ function PageB() {
       }
     };
 
+    // Define beforeunload handler
     const handleBeforeUnload = () => {
       cleanup();
     };
@@ -326,10 +310,13 @@ function PageB() {
           <div style={{ height: 400, width: '100%', marginBottom: 16 }}>
             {showMap && isMapReady && touristPlaces.length > 0 ? (
               <div key={mapKey} id={mapContainerId} style={{ height: '100%', width: '100%' }}>
-                <MapWrapper
+                <MapContainer
                   center={center}
                   zoom={7}
+                  style={{ height: '100%', width: '100%' }}
                   whenCreated={handleMapCreated}
+                  preferCanvas={true}
+                  key={mapKey}
                 >
                   <TileLayer 
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -355,7 +342,7 @@ function PageB() {
                   ))}
 
                   {geoData && <GeoJSON data={geoData} />}
-                </MapWrapper>
+                </MapContainer>
               </div>
             ) : (
               <div style={{ 
@@ -368,16 +355,10 @@ function PageB() {
                 border: '2px dashed #ccc'
               }}>
                 <div style={{ textAlign: 'center' }}>
-                  {!showMap ? (
-                    <p>Map is unmounted. Click "Mount Map" to show the map.</p>
-                  ) : (
-                    <>
-                      <p>{isMapReady ? 'Loading map data...' : 'Preparing map...'}</p>
-                      <p style={{ fontSize: '0.9rem', color: '#666' }}>
-                        Tourist places: {touristPlaces.length} | Districts: {geoData ? 'Loaded' : 'Loading...'}
-                      </p>
-                    </>
-                  )}
+                  <p>Loading map data...</p>
+                  <p style={{ fontSize: '0.9rem', color: '#666' }}>
+                    Tourist places: {touristPlaces.length} | Districts: {geoData ? 'Loaded' : 'Loading...'}
+                  </p>
                 </div>
               </div>
             )}

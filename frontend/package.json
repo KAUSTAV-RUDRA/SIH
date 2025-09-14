@@ -14,9 +14,9 @@
   "description": "",
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1",
-    "react-router-dom": "^7.9.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.21.1",
     "react-scripts": "^5.0.1",
     "aframe": "^1.5.0",
     "leaflet": "^1.9.4",
