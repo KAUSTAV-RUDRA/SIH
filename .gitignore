@@ -1,8 +1,11 @@
-# Node modules
 node_modules/
+
+# Logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+logs/
+*.log
 
 # Build output
 dist/
@@ -10,43 +13,45 @@ build/
 out/
 coverage/
 
-# System files
-.DS_Store
-Thumbs.db
-
-# VS Code settings
-.vscode/
-*.code-workspace
-
-# Environment variables
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# Logs
-logs/
-*.log
-
-# OS generated files
-*.swp
-*.swo
-
-# React specific
-*.cache
-.cache/
-.idea/
-
 # Frontend build artifacts
 frontend/build/
 frontend/dist/
 
-# Backend artifacts (if any)
-backend/__pycache__/
-backend/*.pyc
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+.env.local
+.env.*.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Vite
+.vite/
 
 # Misc
+*.swp
+*.swo
 *.tgz
 *.bak
 *.tmp
+
+# IDE
+.vscode/
+*.code-workspace
+.idea/
+
+# Others
+package-lock.json
+yarn.lock
+
+# SQLite DB
+*.sqlite
+*.db
+
+# Backend artifacts (if any)
+backend/__pycache__/
+backend/*.pyc
