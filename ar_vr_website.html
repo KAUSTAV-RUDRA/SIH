@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jharkhand Waterfall Virtual Tour</title>
+    <!-- A-Frame library for VR/AR -->
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+            background-color: #1a202c; /* Tailwind's gray-900 */
+        }
+        .container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            pointer-events: none; /* Allows clicks to pass through to the canvas */
+        }
+        .info-card {
+            pointer-events: auto;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            max-width: 90%;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .btn {
+            pointer-events: auto;
+            background-color: #2563eb;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: bold;
+            text-decoration: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+        .hidden {
+            display: none;
+        }
+        #itineraryModal {
+            pointer-events: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #f7fafc;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+            padding: 2rem;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80%;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        #itineraryModal h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+            color: #2d3748;
+        }
+        #itineraryModal textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            border: 1px solid #e2e8f0;
+            resize: vertical;
+        }
+        #itineraryModal button {
+            background-color: #48bb78;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        #itineraryModal button:hover {
+            background-color: #38a169;
+        }
+        #itineraryResult {
+            white-space: pre-wrap;
+            background-color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            color: #2d3748;
+        }
+        .loading-spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border-left-color: #48bb78;
+            animation: spin 1s ease infinite;
+            margin: 1rem auto;
+        }
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        .button-group {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            z-index: 20;
+        }
+        .portal {
+            cursor: pointer;
+            animation: pulse 2s infinite ease-in-out;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.8; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+    </div>
+
+    <!-- Define the 3D scene -->
+    <a-scene>
+        <!-- Camera with controls for user interaction -->
+        <a-entity camera look-controls="mouseEnabled: true; touchEnabled: true;" wasd-controls position="0 1.6 0"></a-entity>
+
+        <!-- A-Frame Assets -->
+        <a-assets>
+            <!-- 360-degree image for the waterfall from an external, accessible URL -->
+            <img id="waterfall-img" src="https://i.imgur.com/k2HhV2Z.jpeg" crossorigin="anonymous">
+        </a-assets>
+        
+        <!-- The static skybox to show the 360 image -->
+        <a-sky id="main-sky" src="https://th.bing.com/th/id/R.c38426623420f286041f28ea5250ba12?rik=5ZoODOXT94S1vQ&riu=http%3a%2f%2fthewowstyle.com%2fwp-content%2fuploads%2f2015%2f01%2fWaterfall-in-Mount-Rainier-National-Park-by-Michael-Matti.jpg&ehk=8Uu%2fcvh8YsnEoh2h0r3%2beosYzQspRjmconf8fuFMsco%3d&risl=&pid=ImgRaw&r=0" rotation="0 -90 0"></a-sky>
+
+    </a-scene>
+
+    <script>
+        // Global variables for Firebase and app state
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+    </script>
+</body>
+</html>
