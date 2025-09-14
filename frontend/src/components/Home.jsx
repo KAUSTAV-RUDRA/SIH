@@ -236,70 +236,7 @@ function Home() {
       </div>
 
       {/* Festival Calendar Section */}
-      <div className="calendar-section">
-        <div className="calendar-section-content">
-          <h2 className="calendar-section-title">Jharkhand Festival Calendar</h2>
-          <p className="calendar-section-subtitle">Discover the rich cultural heritage through regional festivals and celebrations</p>
-          
-          <div className="home-calendar-container">
-            <div className="home-calendar-main">
-              <div className="home-calendar-navigation">
-                <button onClick={() => navigateMonth('prev')} className="home-nav-button">
-                  ← Previous
-                </button>
-                <h3 className="home-current-month">
-                  {monthNames[selectedMonth]} {selectedYear}
-                </h3>
-                <button onClick={() => navigateMonth('next')} className="home-nav-button">
-                  Next →
-                </button>
-              </div>
 
-              <div className="home-calendar-grid">
-                <div className="home-calendar-weekdays">
-                  {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
-                    <div key={day} className="home-weekday">{day}</div>
-                  ))}
-                </div>
-                <div className="home-calendar-days">
-                  {renderCalendar()}
-                </div>
-              </div>
-            </div>
-
-            {/* Festival Legend */}
-            <div className="home-calendar-legend">
-              <h4>Festival Types</h4>
-              <div className="home-legend-items">
-                <div className="home-legend-item">
-                  <div className="home-legend-dot religious"></div>
-                  <span>Religious</span>
-                </div>
-                <div className="home-legend-item">
-                  <div className="home-legend-dot national"></div>
-                  <span>National</span>
-                </div>
-                <div className="home-legend-item">
-                  <div className="home-legend-dot cultural"></div>
-                  <span>Cultural</span>
-                </div>
-                <div className="home-legend-item">
-                  <div className="home-legend-dot regional"></div>
-                  <span>Regional</span>
-                </div>
-                <div className="home-legend-item">
-                  <div className="home-legend-dot educational"></div>
-                  <span>Educational</span>
-                </div>
-                <div className="home-legend-item">
-                  <div className="home-legend-dot environmental"></div>
-                  <span>Environmental</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
       {/* Call to Action */}
       <div className="cta-section">
