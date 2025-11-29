@@ -237,7 +237,6 @@ function Home() {
 
       {/* Festival Calendar Section */}
 
-
       {/* Call to Action */}
       <div className="cta-section">
         <div className="cta-content">
