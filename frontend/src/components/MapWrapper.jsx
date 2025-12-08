@@ -1,33 +1,22 @@
-import React from 'react';
-import { MapContainer } from 'react-leaflet';
+import React from "react";
+import { MapContainer, TileLayer } from "react-leaflet";
+import "leaflet/dist/leaflet.css"; // IMPORTANT: required to show the map
 
 const MapWrapper = ({ children, center, zoom, whenCreated }) => {
   return (
-    <MapContainer 
-      center={center} 
-      zoom={zoom} 
-      style={{ height: '100%', width: '100%' }}
+    <MapContainer
+      center={center}
+      zoom={zoom}
+      style={{ height: "100%", width: "100%" }}
       whenCreated={whenCreated}
-      key={Date.now()}
     >
-      {children}
-    </MapContainer>
-  );
-};
+      {/* Default map tiles */}
+      <TileLayer
+        attribution='&copy; OpenStreetMap contributors'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
 
-export default MapWrapper;
-import React from 'react';
-import { MapContainer } from 'react-leaflet';
-
-const MapWrapper = ({ children, center, zoom, whenCreated }) => {
-  return (
-    <MapContainer 
-      center={center} 
-      zoom={zoom} 
-      style={{ height: '100%', width: '100%' }}
-      whenCreated={whenCreated}
-      key={Date.now()}
-    >
+      {/* For additional markers, controls, functions */}
       {children}
     </MapContainer>
   );
