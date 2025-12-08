@@ -16,7 +16,7 @@ function App() {
         <nav className="navbar">
           <div className="nav-container">
             <Link to="/" className="nav-logo">
-              SIH project
+              JSTDC
             </Link>
             <div className="nav-menu">
               <Link to="/" className="nav-link">Home</Link>

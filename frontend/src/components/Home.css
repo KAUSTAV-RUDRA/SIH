@@ -746,3 +746,57 @@
     font-size: 11px;
   }
 }
+/* container right below hero */
+.scrolling-badge {
+  width: 100%;
+  overflow: hidden;
+  background: #0f1724;            /* dark background (change as needed) */
+  color: #fff;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  font-family: inherit;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* wrapper */
+.marquee {
+  width: 100%;
+  overflow: hidden;
+}
+
+/* inner track (two copies side-by-side) */
+.marquee__inner {
+  display: inline-flex;
+  align-items: center;
+  gap: 60px;                      /* spacing between copies */
+  padding: 10px 2rem;             /* vertical padding & side space */
+  will-change: transform;
+  animation: marqueeAnim 18s linear infinite;
+}
+
+/* text blocks */
+.marquee__text {
+  white-space: nowrap;
+  font-size: 16px;
+  line-height: 1;
+  letter-spacing: 0.4px;
+  display: inline-block;
+}
+
+/* pause on hover or focus */
+.marquee__inner:hover,
+.marquee__inner:focus-within {
+  animation-play-state: paused;
+}
+
+/* animation: move left by 50% so the second copy follows */
+@keyframes marqueeAnim {
+  0%   { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Responsive text sizing */
+@media (max-width: 768px) {
+  .marquee__text { font-size: 14px; }
+  .marquee__inner { gap: 40px; padding: 8px 1rem; animation-duration: 22s; }
+}

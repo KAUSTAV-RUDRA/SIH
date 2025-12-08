@@ -170,6 +170,20 @@ function Home() {
           </div>
         </div>
       </div>
+{/* Scrolling marquee - shopping-style */}
+<div className="scrolling-badge" role="region" aria-label="Upcoming events marquee">
+  <div className="marquee">
+    <div className="marquee__inner">
+      <span className="marquee__text">
+        ✨ Upcoming Events in Jharkhand • Nature Festivals • Tribal Culture • Adventure Spots • Heritage Tours • Food & Cuisine • Trekking Trails • Waterfalls • Wildlife Sanctuaries ✨
+      </span>
+      {/* duplicate the same text for continuous loop */}
+      <span className="marquee__text" aria-hidden="true">
+        ✨ Upcoming Events in Jharkhand • Nature Festivals • Tribal Culture • Adventure Spots • Heritage Tours • Food & Cuisine • Trekking Trails • Waterfalls • Wildlife Sanctuaries ✨
+      </span>
+    </div>
+  </div>
+</div>
 
       {/* Features Section */}
       <div className="features-section">
